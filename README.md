@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## To connect banks
+username = user_good
+password = pass_good
+
+## Because this is a development state, it is just made for learning purposes I have used free tier of all the 3rd party apps such as dwolla, plaid, appwrite. 
+
 ## Getting Started
 
 First, run the development server:
