@@ -1,7 +1,8 @@
+'use client'
 import { Account, RecentTransactionsProps } from '@/types'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { BankTabItem } from './BankTabItem'
 import BankInfo from './BankInfo'
 import TransactionsTable from './TransactionsTable'
@@ -16,12 +17,39 @@ const RecentTransactions = ({
   const rowsPerPage = 10
   const totalPages = Math.ceil(transactions.length / rowsPerPage)
 
-  const indexOfLastTransaction = page * rowsPerPage
+  console.log('totalPages', totalPages)
+
+  let firstPage: number
+  let currentTransaction: any
+  firstPage = page
+
+  const handleFirstPage = () => {
+    console.log('totalPages', totalPages)
+    firstPage = 1
+    const indexOfLastTransaction = firstPage * rowsPerPage
+    const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage
+    console.log(transactions)
+    checkCurrentTransactionsLength()
+  }
+
+  const indexOfLastTransaction = firstPage * rowsPerPage
   const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage
-  const currentTransaction = transactions.slice(
-    indexOfFirstTransaction,
-    indexOfLastTransaction
-  )
+
+  const checkCurrentTransactionsLength = () => {
+    if (transactions.length < 10) {
+      currentTransaction = transactions
+    } else {
+      currentTransaction = transactions.slice(
+        indexOfFirstTransaction,
+        indexOfLastTransaction
+      )
+    }
+  }
+
+  checkCurrentTransactionsLength()
+
+  // console.log(currentTransaction)
+
   return (
     <section className="recent-transactions">
       <header className="flex items-center justify-between">
@@ -35,7 +63,10 @@ const RecentTransactions = ({
         </Link>
       </header>
       <Tabs defaultValue={appwriteItemId} className="w-full">
-        <TabsList className="recent-transactions-tablist">
+        <TabsList
+          className="recent-transactions-tablist"
+          onClick={handleFirstPage}
+        >
           {accounts.map((account: Account) => (
             <TabsTrigger key={account.id} value={account.appwriteItemId}>
               <BankTabItem
@@ -62,7 +93,7 @@ const RecentTransactions = ({
             <TransactionsTable transactions={currentTransaction} />
             {totalPages > 1 && (
               <div className="my-4 w-full">
-                <Pagination totalPages={totalPages} page={page} />
+                <Pagination totalPages={totalPages} page={firstPage} />
               </div>
             )}
           </TabsContent>
