@@ -1,10 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Because this is in a development state and it is just made for learning purposes I have used the free tier of all the 3rd party apps such as dwolla, plaid, and appwrite. 
+
 ## To connect banks
 username = user_good
 password = pass_good
 
-## Because this is a development state, it is just made for learning purposes I have used free tier of all the 3rd party apps such as dwolla, plaid, appwrite. 
 
 ## Getting Started
 
@@ -20,7 +21,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://vpn-banking-system-toea.vercel.app/sign-in](https://vpn-banking-system-toea.vercel.app/sign-in) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
