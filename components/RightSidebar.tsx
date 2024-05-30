@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,6 +7,7 @@ import { CategoryCount, RightSidebarProps } from '@/types'
 
 import { countTransactionCategories } from '@/lib/utils'
 import Category from './Category'
+import PlaidLink from './PlaidLink'
 
 const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
   const categories: CategoryCount[] = countTransactionCategories(transactions)
@@ -36,11 +38,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
       <section className="banks">
         <div className="flex w-full justify-between">
           <h2 className="header-2">My Banks</h2>
-          <Link href="/" className="flex gap-2">
-            <Image src="/icons/plus.svg" alt="plus" width={20} height={20} />
-
-            <h2 className="text-14 font-semibold text-gray-600">Add Banks</h2>
-          </Link>
+          <PlaidLink user={user} variant="rightSideBar"></PlaidLink>
         </div>
 
         {banks?.length > 0 && (
@@ -66,15 +64,14 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
                 />
               </div>
             )}
-
-            <div className="mt-10 flex flex-1 flex-col gap-6">
-              <h2 className="header-2"> Top Categories</h2>
-              {categories.map((category, index) => (
-                <Category key={category.name} category={category} />
-              ))}
-            </div>
           </div>
         )}
+        <div className="mt-10 flex flex-1 flex-col gap-6">
+          <h2 className="header-2"> Top Categories</h2>
+          {categories.map((category, index) => (
+            <Category key={category.name} category={category} />
+          ))}
+        </div>
       </section>
     </aside>
   )
